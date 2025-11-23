@@ -21,7 +21,8 @@ add_executable(DuoGuns main.cpp
   mainmenu.h mainmenu.cpp
   application.h application.cpp
   battlecontroller.h battlecontroller.cpp
-  battleview.h battleview.cpp)
+  battleview.h battleview.cpp
+  README.md)
 
 target_link_libraries(DuoGuns
   PRIVATE ftxui::screen

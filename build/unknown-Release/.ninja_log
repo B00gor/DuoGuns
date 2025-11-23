@@ -1,17 +1,17 @@
 # ninja log v5
-1	808	1763868592588869971	CMakeFiles/DuoGuns.dir/chatmessage.cpp.o	9c966fd2bade15ef
+3	2497	1763868594278871281	CMakeFiles/DuoGuns.dir/application.cpp.o	eaa047650e8b55f
+3	2152	1763868593933871024	CMakeFiles/DuoGuns.dir/chatmanager.cpp.o	b90b575d714b61fc
+2	2109	1763868593889870990	CMakeFiles/DuoGuns.dir/defender.cpp.o	e31708114d694307
 2	1125	1763868592905870227	CMakeFiles/DuoGuns.dir/defensesystem.cpp.o	2f835da1d3fa0a61
+2	1955	1763868593736870871	CMakeFiles/DuoGuns.dir/shooter.cpp.o	c58b6f0c68c68d4c
+2943	3053	1763868594830871691	DuoGuns	6f826ef7bc7a867d
+4	2625	1763868594405871376	CMakeFiles/DuoGuns.dir/battleview.cpp.o	ae7d6bc6042110c2
+1	808	1763868592588869971	CMakeFiles/DuoGuns.dir/chatmessage.cpp.o	9c966fd2bade15ef
 1	1195	1763868592976870283	CMakeFiles/DuoGuns.dir/main.cpp.o	cb03f6a7ba3bfdbf
 1	1249	1763868593029870325	CMakeFiles/DuoGuns.dir/gaster.cpp.o	dc62816d1939e8dd
+3	1660	1763868593441870644	CMakeFiles/DuoGuns.dir/battlecontroller.cpp.o	fd64846e594788dd
 3	1349	1763868593130870403	CMakeFiles/DuoGuns.dir/gameengine.cpp.o	f278b7b7fec29367
 2	1354	1763868593135870408	CMakeFiles/DuoGuns.dir/team.cpp.o	96334d724924255c
 3	1423	1763868593204870461	CMakeFiles/DuoGuns.dir/gastergenerator.cpp.o	d5d7f891fbe60229
-3	1660	1763868593441870644	CMakeFiles/DuoGuns.dir/battlecontroller.cpp.o	fd64846e594788dd
-3	1945	1763868593726870864	CMakeFiles/DuoGuns.dir/mainmenu.cpp.o	8097428f9e387571
-2	1955	1763868593736870871	CMakeFiles/DuoGuns.dir/shooter.cpp.o	c58b6f0c68c68d4c
-2	2109	1763868593889870990	CMakeFiles/DuoGuns.dir/defender.cpp.o	e31708114d694307
-3	2152	1763868593933871024	CMakeFiles/DuoGuns.dir/chatmanager.cpp.o	b90b575d714b61fc
-3	2497	1763868594278871281	CMakeFiles/DuoGuns.dir/application.cpp.o	eaa047650e8b55f
-4	2625	1763868594405871376	CMakeFiles/DuoGuns.dir/battleview.cpp.o	ae7d6bc6042110c2
 3	2943	1763868594723871611	CMakeFiles/DuoGuns.dir/teamselectionscreen.cpp.o	29ac545a923e5f32
-2943	3053	1763868594830871691	DuoGuns	6f826ef7bc7a867d
+3	1945	1763868593726870864	CMakeFiles/DuoGuns.dir/mainmenu.cpp.o	8097428f9e387571
