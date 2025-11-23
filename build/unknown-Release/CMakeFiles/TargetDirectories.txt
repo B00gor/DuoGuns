@@ -1,0 +1,7 @@
+/home/boogor/untitled2/build/unknown-Release/CMakeFiles/DuoGuns.dir
+/home/boogor/untitled2/build/unknown-Release/CMakeFiles/edit_cache.dir
+/home/boogor/untitled2/build/unknown-Release/CMakeFiles/rebuild_cache.dir
+/home/boogor/untitled2/build/unknown-Release/CMakeFiles/list_install_components.dir
+/home/boogor/untitled2/build/unknown-Release/CMakeFiles/install.dir
+/home/boogor/untitled2/build/unknown-Release/CMakeFiles/install/local.dir
+/home/boogor/untitled2/build/unknown-Release/CMakeFiles/install/strip.dir
