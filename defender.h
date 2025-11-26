@@ -11,16 +11,24 @@ private:
 public:
     Defender(const std::string& name, int endurance, int defense, int reaction);
 
-    int getDefense() override;
-    int getReaction() override;
-    int getPrimaryStat() override;
-    int getSecondaryStat() override;
-    std::string getType() override;
+    int getDefense() const override;
+    int getReaction() const override;
+    int getPrimaryStat() const override;
+    int getSecondaryStat() const override;
+    std::string getType() const override;
 
-    void setDefense(int defense) override;
+    void setDefenseWithUpdate(int value) override;
+    void setDefense(int defender) override;
     void setReaction(int reaction) override;
 
-    Element renderCard(bool isSelected, bool isFocused, bool isAttacker = false, bool showProtection = false, int protectedBy = -1) override;
+    Element renderCard(bool isSelected, bool isFocused, bool isAttacker = false,
+                       bool showProtection = false, int protectedBy = -1,
+                       const std::string& currentTactic = "",
+                       bool isTacticPhase = true) override;
+
+    void resetTacticEffects() override;
+    void updateDerivedStats() override;
+    bool canBeSelected(const std::string& selector, int currentCount) override;
 };
 
 #endif // DEFENDER_H

@@ -34,7 +34,9 @@ namespace Game {
 inline int winCondition = 5;
 inline int botMoveDelayMs = 100;
 inline int messageDelayMs = 500;
-inline int attackDelayMs = 500;
+inline int attackDelayMs = 200;
+inline bool enableShootout = true;
+inline bool enableCircus = false;
 }
 
 namespace UI {
@@ -45,10 +47,52 @@ inline Color defenderColor = Color::Blue;
 inline Color systemColor = Color::Yellow;
 inline Color cyanColor = Color::Cyan;
 inline Color dimColor = Color::GrayDark;
+
+inline auto getMenuButtonStyle() {
+    auto style = ButtonOption::Ascii();
+    style.transform = [](const EntryState& state) {
+        auto element = text(state.label) | center | flex;
+        if (state.focused) {
+            element = element | borderDouble | color(Color::White);
+        } else {
+            element = element | border;
+        }
+        return element;
+    };
+    return style;
+}
+
+inline auto getMenuButtonStyleError() {
+    auto style = ButtonOption::Ascii();
+    style.transform = [](const EntryState& state) {
+        auto element = text(state.label) | center | flex;
+        if (state.focused) {
+            element = element | borderDouble | strikethrough | color(Color::Red);
+        } else {
+            element = element | strikethrough | border;
+        }
+        return element;
+    };
+    return style;
+}
 }
 
 namespace Defense {
 inline int shootersPerDefender = 2;
+}
+
+namespace Tactic {
+inline float aggressiveAttackMultiplier = 1.15f;
+inline float aggressiveDefenseMultiplier = 1.0f;
+inline float aggressiveFatigueMultiplier = 1.2f;
+
+inline float cautiousAttackMultiplier = 0.9f;
+inline float cautiousDefenseMultiplier = 1.15f;
+inline float cautiousFatigueMultiplier = 1.0f;
+
+inline float normalAttackMultiplier = 1.0f;
+inline float normalDefenseMultiplier = 1.0f;
+inline float normalFatigueMultiplier = 1.0f;
 }
 
 inline int randomInRange(int min, int max) {

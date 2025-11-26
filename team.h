@@ -11,7 +11,16 @@ private:
     std::vector<std::unique_ptr<Gaster>> teamGasters;
     std::string teamOwner;
 
+    float currentAttackMultiplier = 1.0;
+    float currentDefenseMultiplier = 1.0;
+    float currentFatigueMultiplier = 1.0;
+
 public:
+    Gaster* getPlayer(int index);
+    std::vector<int> getShooterIndices();
+    std::vector<int> getDefenderIndices();
+    int getDefenderForShooter(int shooterIndex);
+
     Team(const std::string& owner);
     Team(Team&& other) = default;
     Team& operator=(Team&& other) = default;
@@ -21,14 +30,14 @@ public:
     std::string& owner();
     size_t size();
     bool empty();
+    void resetStats();
 
-    std::vector<int> getShooterIndices();
-    std::vector<int> getDefenderIndices();
+    void applyTacticEffects(float attackMultiplier, float defenseMultiplier, float fatigueMultiplier);
+    void resetTacticEffects();
+
     void setupDefenseSystem();
-    int getDefenderForShooter(int shooterIndex);
     bool isTeamAlive();
     void resetTeam(int endurance);
-    Gaster* getPlayer(int index);
 };
 
 #endif // TEAM_H

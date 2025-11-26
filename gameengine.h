@@ -14,6 +14,8 @@ public:
     GameEngine() = default;
     bool performAttack(Gaster& attacker, Gaster& target, bool isPlayerAttack, ChatManager& chatManager);
     int findBestTarget(Team& enemyTeam, Gaster& attacker);
+    void addPlayerMessage(const Element& content);
+    void addBotMessage(const Element& content);
     DefenseSystem& defenseSystem();
 };
 

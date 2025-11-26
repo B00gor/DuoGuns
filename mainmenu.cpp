@@ -3,21 +3,10 @@
 Component MainMenu::create(std::function<void(int)> onMenuSelect) {
     auto menuContainer = Container::Vertical({});
 
-    auto menuButtonStyle = ButtonOption::Ascii();
-    menuButtonStyle.transform = [](const EntryState& state) {
-        auto element = text(state.label) | center | flex;
-        if (state.focused) {
-            element = element | borderDouble | color(Color::White);
-        } else {
-            element = element | border;
-        }
-        return element;
-    };
-
-    auto singleplayerBtn = Button("Одиночная игра", [=] { onMenuSelect(1); }, menuButtonStyle);
-    auto multiplayerBtn = Button("Мультиплеер", [=] { onMenuSelect(2); }, menuButtonStyle);
-    auto settingsBtn = Button("Настройки", [=] { onMenuSelect(3); }, menuButtonStyle);
-    auto exitBtn = Button("Выход", [=] { onMenuSelect(0); }, menuButtonStyle);
+    auto singleplayerBtn = Button("Одиночная игра", [=] { onMenuSelect(1); }, Config::UI::getMenuButtonStyle());
+    auto multiplayerBtn = Button("Мультиплеер", [=] { onMenuSelect(2); }, Config::UI::getMenuButtonStyleError());
+    auto settingsBtn = Button("Настройки", [=] { onMenuSelect(3); }, Config::UI::getMenuButtonStyle());
+    auto exitBtn = Button("Выход", [=] { onMenuSelect(0); }, Config::UI::getMenuButtonStyle());
 
     menuContainer->Add(singleplayerBtn);
     menuContainer->Add(multiplayerBtn);

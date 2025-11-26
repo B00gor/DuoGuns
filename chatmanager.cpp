@@ -2,75 +2,50 @@
 #include "config.h"
 
 ChatManager::ChatManager() {
-    addSystemMessage("Система: Игра началась!");
-    addSystemMessage("Система: Сначала выберите своего стрелка для атаки");
-    addSystemMessage("Система: Затем выберите цель из правой команды");
-    addSystemMessage("Система: Защитники автоматически защищают стрелков!");
-    addSystemMessage("Система: Чтобы атаковать стрелка, сначала нужно победить его защитника!");
-    addSystemMessage("Система: Уничтожьте всех бойцов вражеской команды, чтобы получить очко!");
+    addSystemMessage(text("Система: Игра началась!") | color(Config::UI::systemColor) | bold);
+    addSystemMessage(text("Система: Выберите стрелка для атаки") | color(Config::UI::systemColor) | bold);
+    addSystemMessage(text("Система: Выберите цель из правой команды") | color(Config::UI::systemColor) | bold);
+    addSystemMessage(text("Система: Защитники защищают стрелков!") | color(Config::UI::systemColor) | bold);
 }
 
 void ChatManager::addMessage(ChatMessage& message) {
     chatMessages.push_back(message);
 }
 
-void ChatManager::addSystemMessage(const std::string& content) {
-    chatMessages.emplace_back("system", text(content) | color(Config::UI::systemColor) | bold);
+void ChatManager::addSystemMessage(const Element& content) {
+    chatMessages.emplace_back("system", content);
 }
 
-void ChatManager::addPlayerMessage(std::string& content) {
-    chatMessages.emplace_back("player",
-                              hbox({ text("Ты: ") | color(Config::UI::playerColor),
-                                    separator(),
-                                    text(content) })
-                                  | border
-                              );
+void ChatManager::addDiedGasterMessage(const Element& content) {
+    auto messageElement = window(
+        text("") | hcenter | bold,
+        content
+        );
+    chatMessages.emplace_back("center", messageElement);
 }
 
-void ChatManager::addBotMessage(const std::string& content) {
-    chatMessages.emplace_back("bot",
-                              hbox({ text("Бот: ") | color(Config::UI::botColor),
-                                    separator(),
-                                    text(content) })
-                                  | border
-                              );
+void ChatManager::addPlayerMessage(const Element& content) {
+    auto messageElement = window(
+        text("") | hcenter | bold,
+        content
+        );
+    chatMessages.emplace_back("player", messageElement);
 }
 
-void ChatManager::addAttackMessage(std::string& attacker, std::string& target,
-                                   int damage, bool hit, bool isPlayer) {
-    Element messageElement;
+void ChatManager::addBotMessage(const Element& content) {
+    auto messageElement = window(
+        text("") | hcenter | bold,
+        content
+        );
+    chatMessages.emplace_back("bot", messageElement);
+}
 
-    if (!hit) {
-        messageElement = hbox({
-                             text(isPlayer ? "Ты: " : "Бот: ") | color(isPlayer ? Config::UI::playerColor : Config::UI::botColor),
-                             separator(),
-                             text(attacker) | color(isPlayer ? Config::UI::playerColor : Config::UI::botColor) | bold,
-                             text(" промахнулся по "),
-                             text(target) | color(Color::GreenYellow) | bold,
-                             text("!")
-                         }) | border;
-    } else if (damage > 0) {
-        messageElement = hbox({
-                             text(isPlayer ? "Ты: " : "Бoт: ") | color(isPlayer ? Config::UI::playerColor : Config::UI::botColor),
-                             separator(),
-                             text(attacker) | color(isPlayer ? Config::UI::playerColor : Config::UI::botColor) | bold,
-                             text(" нанес "),
-                             text(std::to_string(damage)) | color(Color::Red) | bold,
-                             text(" урона "),
-                             text(target) | color(Color::GreenYellow) | bold,
-                             text("!")
-                         }) | border;
-    } else {
-        messageElement = hbox({
-                             text(isPlayer ? "Ты: " : "Бот: ") | color(isPlayer ? Config::UI::playerColor : Config::UI::botColor),
-                             separator(),
-                             text(attacker) | color(isPlayer ? Config::UI::playerColor : Config::UI::botColor) | bold,
-                             text(" атакует "),
-                             text(target) | color(Color::Yellow) | bold,
-                             text("!")
-                         }) | border;
-    }
-
+void ChatManager::addAttackMessage(const Element& content, bool isPlayer) {
+    auto messageElement = window(
+        text(isPlayer ? "АТАКА ИГРОКА" : "АТАКА БОТА") | hcenter | bold |
+            color(isPlayer ? Config::UI::playerColor : Config::UI::botColor),
+        content
+        );
     chatMessages.emplace_back(isPlayer ? "player" : "bot", messageElement);
 }
 
@@ -121,6 +96,7 @@ Component ChatManager::createChatComponent() {
                 scrollableContent | flex,
                 scrollbar
             }));
+            scrollPosition = 1.0f;
         }
     };
 

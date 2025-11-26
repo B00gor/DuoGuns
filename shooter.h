@@ -11,16 +11,24 @@ private:
 public:
     Shooter(const std::string& name, int endurance, int attack, int accuracy);
 
-    int getAttack() override;
-    int getAccuracy() override;
-    int getPrimaryStat() override;
-    int getSecondaryStat() override;
-    std::string getType() override;
+    int getAttack() const override;
+    int getAccuracy() const override;
+    int getPrimaryStat() const override;
+    int getSecondaryStat() const override;
+    std::string getType() const override;
 
+    void setAttackWithUpdate(int value) override;
     void setAttack(int attack) override;
     void setAccuracy(int accuracy) override;
 
-    Element renderCard(bool isSelected, bool isFocused, bool isAttacker = false, bool showProtection = false, int protectedBy = -1) override;
+    void resetTacticEffects() override;
+    void updateDerivedStats() override;
+    bool canBeSelected(const std::string& selector, int currentCount) override;
+
+    Element renderCard(bool isSelected, bool isFocused, bool isAttacker = false,
+                       bool showProtection = false, int protectedBy = -1,
+                       const std::string& currentTactic = "",
+                       bool isTacticPhase = true) override;
 };
 
 #endif // SHOOTER_H

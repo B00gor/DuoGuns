@@ -8,6 +8,8 @@
 #include "gaster.h"
 #include "team.h"
 #include "gastergenerator.h"
+#include <thread>
+#include <chrono>
 #include <ftxui/component/component.hpp>
 #include <ftxui/component/screen_interactive.hpp>
 
@@ -27,18 +29,17 @@ private:
     std::string currentTurn = "player";
     bool selectionLocked = false;
     bool selectionCompleted = false;
-
-public:
-    TeamSelectionScreen();
-    std::pair<std::unique_ptr<Team>, std::unique_ptr<Team>> run();
-
-private:
     void handlePlayerSelection(int index, ScreenInteractive& screen);
     void botMakeMove(ScreenInteractive& screen);
     void updateStats();
     bool isSelectionComplete();
+
     Element renderPlayerCard(int index, bool isSelected, bool isFocused);
     Element renderUI(std::vector<Component>& playerButtons, std::vector<int>& defenderIndices, std::vector<int>& shooterIndices, Component& backButton);
+
+public:
+    TeamSelectionScreen();
+    std::pair<std::unique_ptr<Team>, std::unique_ptr<Team>> run();
 };
 
 #endif // TEAMSELECTIONSCREEN_H

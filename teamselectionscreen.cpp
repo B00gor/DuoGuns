@@ -1,7 +1,5 @@
 #include "teamselectionscreen.h"
 #include "config.h"
-#include <thread>
-#include <chrono>
 
 TeamSelectionScreen::TeamSelectionScreen() {
     allPlayers = playerGenerator.generateAllPlayers();
@@ -51,7 +49,7 @@ std::pair<std::unique_ptr<Team>, std::unique_ptr<Team>> TeamSelectionScreen::run
     auto backButton = Button("Назад", [&] {
         selectionCompleted = false;
         screen.Exit();
-    });
+    }, Config::UI::getMenuButtonStyle());
 
     auto rightPanelContainer = Container::Vertical({ defendersContainer, shootersContainer });
     auto mainContainer = Container::Horizontal({ Container::Vertical({ backButton }), rightPanelContainer });
@@ -177,7 +175,7 @@ bool TeamSelectionScreen::isSelectionComplete() {
 
 Element TeamSelectionScreen::renderPlayerCard(int index, bool isSelected, bool isFocused) {
     Gaster* player = allPlayers[index].get();
-    return player->renderCard(isSelected, isFocused);
+    return player->renderCard(isSelected, isFocused, false, false, -1, "");
 }
 
 Element TeamSelectionScreen::renderUI(std::vector<Component>& playerButtons,

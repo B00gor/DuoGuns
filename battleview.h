@@ -11,17 +11,10 @@ private:
     BattleController& controller;
     std::string currentMessage = "";
 
-    Component messageInput;
-    Component sendButton;
-    Component attackButton;
-    Component chatComponent;
-    Component leftTeamContainer;
-    Component rightTeamContainer;
-    Component centerContainer;
-    Component mainContainer;
-
     std::vector<Component> leftButtons;
     std::vector<Component> rightButtons;
+
+    int calculateTemporaryStat(int baseStat, const std::string& tactic, bool isAttackStat);
 
 public:
     BattleView(BattleController& controller);
@@ -29,11 +22,11 @@ public:
 
 private:
     std::vector<Component> createTeamButtons(Team& team, bool isPlayerTeam);
-    Component createTeamContainer(Team& team, std::vector<Component>& buttons, const std::string& title, Color titleColor, bool reverseOrder);
-    Element renderCenterPanel(Component& chatComponent, Component& messageInput, Component& sendButton, Component& attackButton);
+    Component createTeamContainer(Team& team, std::vector<Component>& buttons, const std::string& title, Color titleColor, bool reverseOrder, bool isPlayerTeam);
     Element renderSelectionInfo();
-    Element renderPlayerInfo(int index, Team& team, const std::string& title, Color titleColor);
+    Element renderPlayerInfo(int index, Team& team, const std::string& title, Color titleColor, bool isPlayerTeam);
     Element renderInstructions();
+    Element renderTacticSelection(const Component& aggressiveBtn, const Component& cautiousBtn, const Component& normalBtn, const Component& confirmBtn);
 };
 
 #endif // BATTLEVIEW_H

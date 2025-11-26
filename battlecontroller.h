@@ -6,7 +6,7 @@
 #include "gameengine.h"
 #include "chatmanager.h"
 #include <memory>
-#include <functional>
+#include <string>
 
 class BattleController {
 private:
@@ -14,11 +14,23 @@ private:
     std::unique_ptr<Team> botTeam;
     GameEngine gameEngine;
     ChatManager chatManager;
+    bool isPlayerTurn;
 
     int selectedAttacker = -1;
     int selectedTarget = -1;
     int playerWins = 0;
     int botWins = 0;
+
+    bool waitingForTactic = true;
+    std::string playerTactic = "Обычный";
+    std::string botTactic = "Обычный";
+
+    void performBotAttack();
+    void handleTargetKilled(Gaster* target);
+    void handleRoundEnd(bool playerWon);
+    void handleGameEnd();
+    void applyTacticEffects();
+    void setupTactics();
 
 public:
     BattleController(std::unique_ptr<Team> playerTeam, std::unique_ptr<Team> botTeam);
@@ -31,19 +43,27 @@ public:
     int getBotWins();
     ChatManager& getChatManager();
     GameEngine& getGameEngine();
-    bool isGameFinished();
+    std::string getPlayerTactic();
+    std::string getPendingPlayerTactic();
+    std::string getBotTactic();
 
-    // Методы управления битвой
+    bool isGameFinished();
+    bool isWaitingForTactic();
+    bool isPlayerTurnActive() { return isPlayerTurn; }
+
     void handleAttackerSelection(int index);
     void handleTargetSelection(int index);
     void performPlayerAttack();
     void sendMessage(std::string& message);
 
-private:
-    void performBotAttack();
-    void handleTargetKilled(Gaster* target);
-    void handleRoundEnd(bool playerWon);
-    void handleGameEnd();
+    void selectPlayerTactic(const std::string& tactic);
+    void confirmTactic();
+    void startNewRound();
+
+    void handleTiebreaker();
+    void performTiebreakerRound();
+    bool isTiebreakerScenario();
+    void resetForNewRound();
 };
 
-#endif // BATTLECONTROLLER_H
+#endif
